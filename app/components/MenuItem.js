@@ -6,7 +6,11 @@ import MyText from "./MyText";
 
 function MenuItem({ title, onPress, visible }) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      activeOpacity={0.7}
+    >
       {visible && <View style={styles.dot} />}
       <MyText style={styles.text}>{title}</MyText>
     </TouchableOpacity>

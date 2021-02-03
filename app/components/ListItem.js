@@ -14,16 +14,12 @@ function ListItem({
   image = null,
   onPress,
   renderRightActions,
-  time,
+  RightComponent,
   style,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableHighlight
-        underlayColor={"#E7E9E9"}
-        onPress={onPress}
-        activeOpacity={0.2}
-      >
+      <TouchableHighlight underlayColor={"#E7E9E9"} onPress={onPress}>
         <View style={[styles.container, style]}>
           <Image
             style={styles.image}
@@ -37,16 +33,17 @@ function ListItem({
 
             {description && (
               <Text
-                numberOfLines={2}
-                style={[styles.text, { color: "#918C8C", fontSize: 16 }]}
+                numberOfLines={1}
+                style={[
+                  styles.text,
+                  { color: "#918C8C", fontSize: 16, marginTop: 3 },
+                ]}
               >
                 {description}
               </Text>
             )}
           </View>
-          <Text style={[styles.text, { color: "#918C8C", fontSize: 16 }]}>
-            {time}
-          </Text>
+          {RightComponent}
         </View>
       </TouchableHighlight>
     </Swipeable>

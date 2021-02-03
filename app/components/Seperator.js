@@ -7,10 +7,10 @@ function Seperator({ style }) {
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: "center",
+    alignSelf: "flex-end",
     backgroundColor: "#E7E9E9",
     height: 1,
-    width: "95%",
+    width: "80%",
   },
 });
 

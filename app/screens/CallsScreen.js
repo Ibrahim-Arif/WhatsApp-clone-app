@@ -1,33 +1,32 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import ListItem from "../components/ListItem";
-import ListItemDeleteAction from "../components/ListItemDeleteAction";
-import ListItemMenuAction from "../components/ListItemMenuAction";
-import MyText from "../components/MyText";
 import Seperator from "../components/Seperator";
+import colors from "../config/colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-function MessagesScreen({ data, type, style, ...otherProps }) {
+function CallsScreen({ data, style, ...otherProps }) {
   return (
     <View style={[styles.container, style]}>
       <FlatList
         data={data}
-        keyExtractor={(message) => message.id.toString()}
+        keyExtractor={(call) => call.id.toString()}
         renderItem={({ item }) => (
           <ListItem
             image={item.image}
             title={item.title}
             onPress={() => null}
             description={item.description}
-            RightComponent={<MyText style={styles.time}>{item.time}</MyText>}
-            renderRightActions={() => (
-              <>
-                <ListItemDeleteAction
-                  onPress={() => otherProps.onDelete(item.id, type)}
-                />
-                <ListItemMenuAction onPress={() => null} />
-              </>
-            )}
+            RightComponent={
+              <TouchableOpacity
+                style={styles.callButton}
+                onPress={() => console.log("called clicked")}
+              >
+                <MaterialIcons name="call" size={24} color={colors.darkgrey} />
+              </TouchableOpacity>
+            }
           />
         )}
         ItemSeparatorComponent={() => <Seperator />}
@@ -43,9 +42,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  time: {
-    color: "#918C8C",
-    fontSize: 16,
+  callButton: {
+    justifyContent: "center",
+    flex: 1,
   },
 });
-export default MessagesScreen;
+export default CallsScreen;

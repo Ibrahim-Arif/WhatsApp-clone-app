@@ -2,110 +2,41 @@ import React, { useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
+import CallsScreen from "./CallsScreen";
 import colors from "../config/colors";
+import Data from "../assets/Data";
 import Icon from "../components/Icon";
 import MenuItem from "../components/MenuItem";
 import MyText from "../components/MyText";
 import Screen from "../components/Screen";
 import MessagesScreen from "./MessagesScreen";
 
-const storyData = [
-  { id: 1, image: require("../assets/user.jpg") },
-  { id: 2, image: require("../assets/user.jpg") },
-  { id: 3, image: require("../assets/user.jpg") },
-  { id: 4, image: require("../assets/user.jpg") },
-  { id: 5, image: require("../assets/user.jpg") },
-  { id: 6, image: require("../assets/user.jpg") },
-  { id: 7, image: require("../assets/user.jpg") },
-  { id: 8, image: require("../assets/user.jpg") },
-  { id: 9, image: require("../assets/user.jpg") },
-  { id: 10, image: require("../assets/user.jpg") },
-];
 const menuItems = [
   { title: "messages" },
   { title: "calls" },
   { title: "groups" },
-  { title: "create" },
-];
-const initialMessages = [
-  {
-    id: 1,
-    title: "Bilal",
-    description: "Hey there! are you free now?",
-    time: "11:50",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 2,
-    title: "Jason",
-    description: "how are you?",
-    time: "09:38",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 3,
-    title: "Tyler",
-    description: "is it raining?",
-    time: "01:45",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 4,
-    title: "Mark",
-    description: "hheheheh i'm reading it too",
-    time: "12:00",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 5,
-    title: "unknown",
-    description: "whats'up weirdo",
-    time: "07:30",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 6,
-    title: "Bilal",
-    description: "Hey there! are you free now?",
-    time: "11:50",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 7,
-    title: "Jason",
-    description: "how are you?",
-    time: "09:38",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 8,
-    title: "Tyler",
-    description: "is it raining?",
-    time: "01:45",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 9,
-    title: "Mark",
-    description: "hheheheh i'm reading it too",
-    time: "12:00",
-    image: require("../assets/user.jpg"),
-  },
-  {
-    id: 10,
-    title: "unknown",
-    description: "whats'up weirdo",
-    time: "07:30",
-    image: require("../assets/user.jpg"),
-  },
+  { title: "stories" },
 ];
 
 function MainScreen({}) {
   const [activeMenu, setActiveMenu] = useState("messages");
-  const [messages, setMessages] = useState(initialMessages);
+  const [messages, setMessages] = useState(Data.initialMessages);
+  const [groups, setGroups] = useState(Data.initialGroups);
 
-  const handleDelete = ({ id }) => {
-    setMessages(messages.filter((m) => m.id !== id));
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleDelete = (id, type) => {
+    if (type === "messages")
+      setMessages(messages.filter((message) => message.id !== id));
+    else if (type === "groups")
+      setGroups(groups.filter((group) => group.id !== id));
+  };
+
+  const handleRefresh = (type) => {
+    setRefreshing(true);
+    if (type === "messages") setMessages(Data.initialMessages);
+    else if (type === "groups") setGroups(Data.initialGroups);
+    setRefreshing(false);
   };
 
   return (
@@ -114,17 +45,12 @@ function MainScreen({}) {
 
       <View>
         <FlatList
-          data={storyData}
-          horizontal={true}
+          data={Data.stories}
           renderItem={({ item }) => (
-            <Icon
-              image={item.image}
-              size={50}
-              backgroundColor="#fff"
-              style={{ margin: 8 }}
-            />
+            <Icon image={item.image} size={50} style={{ margin: 8 }} />
           )}
           keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
           showsHorizontalScrollIndicator={false}
           ListHeaderComponent={() => (
             <Icon
@@ -157,7 +83,25 @@ function MainScreen({}) {
       </View>
 
       <View style={styles.detailContainer}>
-        <MessagesScreen messages={messages} onDelete={handleDelete} />
+        {activeMenu === "messages" && (
+          <MessagesScreen
+            data={messages}
+            type="messages"
+            onDelete={handleDelete}
+            refreshing={refreshing}
+            onRefresh={() => handleRefresh("messages")}
+          />
+        )}
+        {activeMenu === "calls" && <CallsScreen data={Data.calls} />}
+        {activeMenu === "groups" && (
+          <MessagesScreen
+            data={groups}
+            type="groups"
+            onDelete={handleDelete}
+            refreshing={refreshing}
+            onRefresh={() => handleRefresh("groups")}
+          />
+        )}
       </View>
     </Screen>
   );
