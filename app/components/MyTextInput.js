@@ -1,24 +1,25 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Platform } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import Icon from "./Icon";
+import colors from "../config/colors";
 
 function MyTextInput({
   iconName,
   iconColor = "#918C8C",
+  onPress,
   style = null,
   ...otherProps
 }) {
   return (
-    <View style={[styles.container, style]}>
-      {iconName && (
-        <MaterialCommunityIcons
-          name={iconName}
-          size={24}
-          color={iconColor}
-          style={{ marginRight: 10 }}
-        />
-      )}
+    <View style={[styles.container, style]} onPress={onPress}>
       <TextInput style={styles.textInput} {...otherProps} />
+      <Icon
+        name="send"
+        color={colors.white}
+        backgroundColor={colors.primary}
+        iconSize={24}
+      />
     </View>
   );
 }

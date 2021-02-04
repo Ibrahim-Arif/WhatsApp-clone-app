@@ -113,4 +113,61 @@ export default {
       image: require("../assets/Elizabeth-Olsen.jpg"),
     },
   ],
+
+  chats: [
+    {
+      id: 1,
+      username: "ibrahim",
+      text: "t1",
+      time: "12:00",
+    },
+    {
+      id: 2,
+      username: "jason",
+      text: "t2",
+      time: "12:00",
+    },
+    {
+      id: 3,
+      username: "ibrahim",
+      text: "t3",
+      time: "12:00",
+    },
+    {
+      id: 4,
+      username: "jason",
+      text: "t4",
+      time: "12:00",
+    },
+    {
+      id: 5,
+      username: "jason",
+      text: "t5",
+      time: "12:00",
+    },
+    {
+      id: 6,
+      username: "jason",
+      text: "t2",
+      time: "12:00",
+    },
+    {
+      id: 7,
+      username: "ibrahim",
+      text: "t3",
+      time: "12:00",
+    },
+    {
+      id: 8,
+      username: "jason",
+      text: "t4",
+      time: "12:00",
+    },
+    {
+      id: 9,
+      username: "jason",
+      text: "t5",
+      time: "12:00",
+    },
+  ],
 };

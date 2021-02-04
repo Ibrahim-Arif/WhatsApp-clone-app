@@ -18,18 +18,16 @@ function ListItem({
   renderRightActions,
   RightComponent,
   style,
+  textStyle,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={"#E7E9E9"} onPress={onPress}>
         <View style={[styles.container, style]}>
-          <Image
-            style={styles.image}
-            source={image || require("../assets/defaultUser.jpg")}
-          />
+          {image && <Image style={styles.image} source={image} />}
 
           <View style={styles.containerText}>
-            <Text numberOfLines={1} style={[styles.text]}>
+            <Text numberOfLines={1} style={[styles.text, textStyle]}>
               {title}
             </Text>
 
@@ -54,7 +52,6 @@ function ListItem({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     flexDirection: "row",
     padding: 10,
   },
