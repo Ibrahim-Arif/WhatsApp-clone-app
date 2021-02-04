@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import CallsScreen from "./CallsScreen";
@@ -10,6 +10,7 @@ import MenuItem from "../components/MenuItem";
 import MyText from "../components/MyText";
 import Screen from "../components/Screen";
 import MessagesScreen from "./MessagesScreen";
+import StoriesScreen from "./StoriesScreen";
 
 const menuItems = [
   { title: "messages" },
@@ -88,8 +89,13 @@ function MainScreen({}) {
             data={messages}
             type="messages"
             onDelete={handleDelete}
-            refreshing={refreshing}
-            onRefresh={() => handleRefresh("messages")}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={() => handleRefresh("messages")}
+                colors={[colors.yellow]}
+              />
+            }
           />
         )}
         {activeMenu === "calls" && <CallsScreen data={Data.calls} />}
@@ -98,10 +104,16 @@ function MainScreen({}) {
             data={groups}
             type="groups"
             onDelete={handleDelete}
-            refreshing={refreshing}
-            onRefresh={() => handleRefresh("groups")}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={() => handleRefresh("groups")}
+                colors={[colors.yellow]}
+              />
+            }
           />
         )}
+        {activeMenu === "stories" && <StoriesScreen data={Data.stories} />}
       </View>
     </Screen>
   );

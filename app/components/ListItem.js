@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
+import colors from "../config/colors";
+
 function ListItem({
   title,
   description,
@@ -36,7 +38,7 @@ function ListItem({
                 numberOfLines={1}
                 style={[
                   styles.text,
-                  { color: "#918C8C", fontSize: 16, marginTop: 3 },
+                  { color: colors.darkgrey, fontSize: 16, marginTop: 3 },
                 ]}
               >
                 {description}
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     width: 55,
   },
   text: {
-    color: "#000",
+    color: colors.black,
     fontSize: 18,
     fontWeight: "bold",
   },
