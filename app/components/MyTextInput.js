@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Platform } from "react-native";
 
 import Icon from "./Icon";
@@ -12,13 +12,14 @@ function MyTextInput({
   ...otherProps
 }) {
   return (
-    <View style={[styles.container, style]} onPress={onPress}>
+    <View style={[styles.container, style]}>
       <TextInput style={styles.textInput} {...otherProps} />
       <Icon
         name="send"
         color={colors.white}
         backgroundColor={colors.primary}
         iconSize={24}
+        onPress={onPress}
       />
     </View>
   );

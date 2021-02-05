@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -13,8 +13,23 @@ import ListItem from "../components/ListItem";
 import colors from "../config/colors";
 import MyTextInput from "../components/MyTextInput";
 import Message from "../components/Message";
+import Data from "../assets/Data";
 
 function ChatScreen({ title, data, onClose }) {
+  const [textInput, setTextInput] = useState("");
+
+  const handleSent = () => {
+    if (!textInput) return;
+
+    Data.chats.unshift({
+      id: Data.chats.length + 1,
+      username: title,
+      text: textInput,
+      time: "12:00",
+    });
+    setTextInput("");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -54,8 +69,10 @@ function ChatScreen({ title, data, onClose }) {
       </View>
 
       <MyTextInput
-        placeholder="Type your message..."
+        placeholder={"Type message here..."}
         style={styles.textInput}
+        onChangeText={(input) => setTextInput(input)}
+        onPress={handleSent}
       />
     </View>
   );
@@ -81,13 +98,15 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     position: "absolute",
-    top: 10,
+    top: 5,
     width: Dimensions.get("screen").width,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightgrey,
   },
   list: {
     position: "absolute",
     width: "100%",
-    top: 100,
+    top: 90,
     alignSelf: "center",
     bottom: 65,
   },
