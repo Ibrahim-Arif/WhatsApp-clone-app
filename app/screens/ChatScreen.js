@@ -13,7 +13,6 @@ import ListItem from "../components/ListItem";
 import colors from "../config/colors";
 import MyTextInput from "../components/MyTextInput";
 import Message from "../components/Message";
-import Data from "../assets/Data";
 
 function ChatScreen({ title, data, onClose }) {
   const [textInput, setTextInput] = useState("");
@@ -21,12 +20,13 @@ function ChatScreen({ title, data, onClose }) {
   const handleSent = () => {
     if (!textInput) return;
 
-    Data.chats.unshift({
-      id: Data.chats.length + 1,
+    data.unshift({
+      id: data.length + 1,
       username: title,
       text: textInput,
       time: "12:00",
     });
+
     setTextInput("");
   };
 

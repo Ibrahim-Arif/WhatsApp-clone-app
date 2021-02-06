@@ -11,7 +11,6 @@ import ChatScreen from "./ChatScreen";
 
 function MessagesScreen({ data, type, style, ...otherProps }) {
   const [modelVisibled, setModelVisibled] = useState(false);
-  const [chatFor, setChatFor] = useState("");
 
   return (
     <>
@@ -24,7 +23,6 @@ function MessagesScreen({ data, type, style, ...otherProps }) {
               image={item.image}
               title={item.title}
               onPress={() => {
-                setChatFor(item.title);
                 setModelVisibled(true);
               }}
               description={item.description}
