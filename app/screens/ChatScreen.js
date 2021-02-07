@@ -71,8 +71,9 @@ function ChatScreen({ title, data, onClose }) {
       <MyTextInput
         placeholder={"Type message here..."}
         style={styles.textInput}
-        onChangeText={(input) => setTextInput(input)}
         onPress={handleSent}
+        onChangeText={(input) => setTextInput(input)}
+        clearTextOnFocus
       />
     </View>
   );
