@@ -26,7 +26,6 @@ function ChatScreen({ title, data, onClose }) {
       text: textInput,
       time: "12:00",
     });
-
     setTextInput("");
   };
 
@@ -73,7 +72,7 @@ function ChatScreen({ title, data, onClose }) {
         style={styles.textInput}
         onPress={handleSent}
         onChangeText={(input) => setTextInput(input)}
-        clearTextOnFocus
+        value={textInput}
       />
     </View>
   );
